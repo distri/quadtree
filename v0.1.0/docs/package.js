@@ -18,19 +18,19 @@
     "main.coffee.md": {
       "path": "main.coffee.md",
       "mode": "100644",
-      "content": "Quadtree\n========\n\n    QuadTree = require \"./lib/quadtree\"\n\n    module.exports = (I={}) ->\n      I.x ?= 0\n      I.y ?= 0\n      I.width ?= 1\n      I.height ?= 1\n\n      new QuadTree(I)\n",
+      "content": "Quadtree\n========\n\n    QuadTree = require \"./lib/quadtree\"\n\n    module.exports = (I={}) ->\n      I.x ?= 0\n      I.y ?= 0\n      I.width ?= 1\n      I.height ?= 1\n\n      new QuadTree(I, true)\n",
       "type": "blob"
     },
     "test/quadtree.coffee": {
       "path": "test/quadtree.coffee",
       "mode": "100644",
-      "content": "QuadTree = require \"../main\"\nBounds = require \"../lib/bounds\"\n\nglobal.require = require\n\ndescribe \"QuadTree\", ->\n  it \"should store and query values\", ->\n    tree = QuadTree()\n\n    positions = [0...1000].map (i) ->\n      p = Point(rand(32), rand(32))\n      p.i = i\n\n      p\n\n    positions.forEach (position) ->\n      tree.insert position\n\n    positions.forEach (position, i) ->\n      q = Bounds(position)\n      results = tree.retrieve(q)\n\n      assert results.map((r)->r.i).indexOf(i) >= 0, \"results contain #{i}\"\n\ndescribe \"Bounds\", ->\n  it \"should exist\", ->\n    assert Bounds\n  \n  it \"instances should be instances\", ->\n    assert Bounds() instanceof Bounds\n",
+      "content": "QuadTree = require \"../main\"\nBounds = require \"../lib/bounds\"\n\nglobal.require = require\n\ndescribe \"QuadTree\", ->\n  it \"should store and query values\", ->\n    tree = QuadTree()\n\n    positions = [0...1000].map (i) ->\n      p = Point(rand(i % 37), rand(i % 43))\n      p.i = i\n\n      p\n\n    positions.forEach (position) ->\n      tree.insert position\n\n    positions.forEach (position, i) ->\n      results = tree.retrieve(position)\n\n      assert results.map((r)->r.i).indexOf(i) >= 0, \"results contain #{i}\"\n\ndescribe \"Bounds\", ->\n  it \"should exist\", ->\n    assert Bounds\n  \n  it \"instances should be instances\", ->\n    assert Bounds() instanceof Bounds\n",
       "type": "blob"
     },
     "pixie.cson": {
       "path": "pixie.cson",
       "mode": "100644",
-      "content": "version: \"0.1.0\"\nremoteDependencies: [\n  \"http://strd6.github.io/tempest/javascripts/envweb-v0.4.7.js\"\n]\n",
+      "content": "version: \"0.1.1\"\nremoteDependencies: [\n  \"http://strd6.github.io/tempest/javascripts/envweb-v0.4.7.js\"\n]\n",
       "type": "blob"
     },
     "lib/compositions.coffee.md": {
@@ -61,17 +61,17 @@
   "distribution": {
     "main": {
       "path": "main",
-      "content": "(function() {\n  var QuadTree;\n\n  QuadTree = require(\"./lib/quadtree\");\n\n  module.exports = function(I) {\n    if (I == null) {\n      I = {};\n    }\n    if (I.x == null) {\n      I.x = 0;\n    }\n    if (I.y == null) {\n      I.y = 0;\n    }\n    if (I.width == null) {\n      I.width = 1;\n    }\n    if (I.height == null) {\n      I.height = 1;\n    }\n    return new QuadTree(I);\n  };\n\n}).call(this);\n\n//# sourceURL=main.coffee",
+      "content": "(function() {\n  var QuadTree;\n\n  QuadTree = require(\"./lib/quadtree\");\n\n  module.exports = function(I) {\n    if (I == null) {\n      I = {};\n    }\n    if (I.x == null) {\n      I.x = 0;\n    }\n    if (I.y == null) {\n      I.y = 0;\n    }\n    if (I.width == null) {\n      I.width = 1;\n    }\n    if (I.height == null) {\n      I.height = 1;\n    }\n    return new QuadTree(I, true);\n  };\n\n}).call(this);\n\n//# sourceURL=main.coffee",
       "type": "blob"
     },
     "test/quadtree": {
       "path": "test/quadtree",
-      "content": "(function() {\n  var Bounds, QuadTree;\n\n  QuadTree = require(\"../main\");\n\n  Bounds = require(\"../lib/bounds\");\n\n  global.require = require;\n\n  describe(\"QuadTree\", function() {\n    return it(\"should store and query values\", function() {\n      var positions, tree, _i, _results;\n      tree = QuadTree();\n      positions = (function() {\n        _results = [];\n        for (_i = 0; _i < 1000; _i++){ _results.push(_i); }\n        return _results;\n      }).apply(this).map(function(i) {\n        var p;\n        p = Point(rand(32), rand(32));\n        p.i = i;\n        return p;\n      });\n      positions.forEach(function(position) {\n        return tree.insert(position);\n      });\n      return positions.forEach(function(position, i) {\n        var q, results;\n        q = Bounds(position);\n        results = tree.retrieve(q);\n        return assert(results.map(function(r) {\n          return r.i;\n        }).indexOf(i) >= 0, \"results contain \" + i);\n      });\n    });\n  });\n\n  describe(\"Bounds\", function() {\n    it(\"should exist\", function() {\n      return assert(Bounds);\n    });\n    return it(\"instances should be instances\", function() {\n      return assert(Bounds() instanceof Bounds);\n    });\n  });\n\n}).call(this);\n\n//# sourceURL=test/quadtree.coffee",
+      "content": "(function() {\n  var Bounds, QuadTree;\n\n  QuadTree = require(\"../main\");\n\n  Bounds = require(\"../lib/bounds\");\n\n  global.require = require;\n\n  describe(\"QuadTree\", function() {\n    return it(\"should store and query values\", function() {\n      var positions, tree, _i, _results;\n      tree = QuadTree();\n      positions = (function() {\n        _results = [];\n        for (_i = 0; _i < 1000; _i++){ _results.push(_i); }\n        return _results;\n      }).apply(this).map(function(i) {\n        var p;\n        p = Point(rand(i % 37), rand(i % 43));\n        p.i = i;\n        return p;\n      });\n      positions.forEach(function(position) {\n        return tree.insert(position);\n      });\n      return positions.forEach(function(position, i) {\n        var results;\n        results = tree.retrieve(position);\n        return assert(results.map(function(r) {\n          return r.i;\n        }).indexOf(i) >= 0, \"results contain \" + i);\n      });\n    });\n  });\n\n  describe(\"Bounds\", function() {\n    it(\"should exist\", function() {\n      return assert(Bounds);\n    });\n    return it(\"instances should be instances\", function() {\n      return assert(Bounds() instanceof Bounds);\n    });\n  });\n\n}).call(this);\n\n//# sourceURL=test/quadtree.coffee",
       "type": "blob"
     },
     "pixie": {
       "path": "pixie",
-      "content": "module.exports = {\"version\":\"0.1.0\",\"remoteDependencies\":[\"http://strd6.github.io/tempest/javascripts/envweb-v0.4.7.js\"]};",
+      "content": "module.exports = {\"version\":\"0.1.1\",\"remoteDependencies\":[\"http://strd6.github.io/tempest/javascripts/envweb-v0.4.7.js\"]};",
       "type": "blob"
     },
     "lib/compositions": {
@@ -98,7 +98,7 @@
   "progenitor": {
     "url": "http://strd6.github.io/editor/"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "entryPoint": "main",
   "remoteDependencies": [
     "http://strd6.github.io/tempest/javascripts/envweb-v0.4.7.js"
