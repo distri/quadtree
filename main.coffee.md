@@ -9,4 +9,4 @@ Quadtree
       I.width ?= 1
       I.height ?= 1
 
-      new QuadTree(I)
+      new QuadTree(I, true)

@@ -8,7 +8,7 @@ describe "QuadTree", ->
     tree = QuadTree()
 
     positions = [0...1000].map (i) ->
-      p = Point(rand(32), rand(32))
+      p = Point(rand(i % 37), rand(i % 43))
       p.i = i
 
       p
@@ -17,8 +17,7 @@ describe "QuadTree", ->
       tree.insert position
 
     positions.forEach (position, i) ->
-      q = Bounds(position)
-      results = tree.retrieve(q)
+      results = tree.retrieve(position)
 
       assert results.map((r)->r.i).indexOf(i) >= 0, "results contain #{i}"
 
