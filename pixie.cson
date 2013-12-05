@@ -1,0 +1,4 @@
+version: "0.1.0"
+remoteDependencies: [
+  "http://strd6.github.io/tempest/javascripts/envweb-v0.4.7.js"
+]
