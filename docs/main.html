@@ -32,7 +32,9 @@
               <div class="pilwrap">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              
+              <p>Wrapping up a patched version of:</p>
+<p><a href="https://github.com/jsmarkus/ExamplesByMesh/blob/1b42ccdd4b89e15231ca0eaaf690ac236a64306c/JavaScript/QuadTree/src/QuadTree.js">https://github.com/jsmarkus/ExamplesByMesh/blob/1b42ccdd4b89e15231ca0eaaf690ac236a64306c/JavaScript/QuadTree/src/QuadTree.js</a></p>
+
             </div>
             <div class="content"><pre><code class="lang-coffeescript">QuadTree = require <span class="string">"./lib/quadtree"</span>
 
@@ -42,7 +44,7 @@ module.<span class="function"><span class="title">exports</span></span> = (I={})
   I.width ?= <span class="number">1</span>
   I.height ?= <span class="number">1</span>
 
-  <span class="keyword">new</span> QuadTree(I)</code></pre>
+  <span class="keyword">new</span> QuadTree(I, <span class="literal">true</span>, I.maxDepth, I.maxChildren)</code></pre>
 </div>
         </li>
         
